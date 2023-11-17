@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BillboardsModule } from './billboards/billboards.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Billboard } from './billboards/entities/billboard.entity';
 
 @Module({
   imports: [
@@ -10,6 +11,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       type: 'sqlite',
       database: 'database.db',
       synchronize: true,
+      entities: [Billboard],
     }),
     BillboardsModule,
   ],

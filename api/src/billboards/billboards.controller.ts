@@ -29,7 +29,7 @@ export class BillboardsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.billboardsService.findOne(+id);
+    return this.billboardsService.findOne(id);
   }
 
   @Patch(':id')
@@ -37,11 +37,11 @@ export class BillboardsController {
     @Param('id') id: string,
     @Body() updateBillboardDto: UpdateBillboardDto,
   ) {
-    return this.billboardsService.update(+id, updateBillboardDto);
+    return this.billboardsService.update(id, updateBillboardDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.billboardsService.remove(+id);
+    return this.billboardsService.remove(id);
   }
 }

@@ -5,12 +5,21 @@ import {
 } from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { HttpStatus, ValidationPipe } from '@nestjs/common';
+import { EntityNotFoundExceptionFilter } from './filters/entity-not-found-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter(),
   );
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+    }),
+  );
+  app.useGlobalFilters(new EntityNotFoundExceptionFilter());
 
   const config = new DocumentBuilder()
     .setTitle('Store API')
